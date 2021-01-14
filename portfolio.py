@@ -36,7 +36,7 @@ class Portfolio(object):
         self.initial_cap = initial_cap
 
         self.all_positions = self.construct_all_positions()
-        self.current_positions = dict((k,v) for k,v in [(s, 0) for s in self.symbol_list])
+        self.current_positions = self.construct_current_positions()
         self.all_holdings = self.construct_all_holdings()
         self.current_holdings = self.construct_current_holdings()
 
@@ -59,6 +59,14 @@ class Portfolio(object):
         d['commission'] = 0.0
         d['total_value'] = self.initial_cap
         return [d]
+
+    def construct_current_positions(self):
+        """
+        This constructs the dictionary which will hold the instantaneous position of the portfolio
+        across all symbols.
+        """
+        d = dict((k, v) for k, v in [(s, 0) for s in self.symbol_list])
+        return d
 
     def construct_current_holdings(self):
         """
@@ -222,8 +230,8 @@ class Portfolio(object):
         total_return = self.equity_curve['equity_curve'][-1]
         returns = self.equity_curve['returns']
         pnl = self.equity_curve['equity_curve']
-        self.equity_curve.to_csv("prac_equity_curve.csv")
-        pd.DataFrame(self.all_positions).to_csv("prac_position.csv")
+        # self.equity_curve.to_csv("prac_equity_curve.csv")
+        # pd.DataFrame(self.all_positions).to_csv("prac_position.csv")
 
         sharpe_ratio = create_sharpe_ratio(returns, periods='minutely')
         drawdown, max_dd, max_dd_duration = create_drawdowns(pnl)

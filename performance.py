@@ -43,3 +43,4 @@ def create_drawdowns(pnl):
         drawdown[t] = hwm[t] - pnl[t] #이거 맞나? 나누기 pnl[t] 해줘야될듯
         duration[t] = (0 if drawdown[t] == 0 else duration[t-1]+1)
     return drawdown, drawdown.max(), duration.max()
+

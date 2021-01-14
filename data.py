@@ -105,7 +105,7 @@ class HistoricMinDataHandler(DataHandler):
         for s in self.symbol_list:
             #Load CSV with no header information, indexed on date
             self.symbol_data[s] = pd.io.parsers.read_csv(
-                os.path.join(self.csv_dir, "%s_minute.csv" % s), #hard coded!?
+                os.path.join(self.csv_dir, "%s_minute_prac.csv" % s), #hard coded!?
                 header=0, index_col=0
                 #,parse_dates=True,
                 #names=['date', 'close', 'open','high', 'low', 'volume'] #needed for getattr????
@@ -121,7 +121,7 @@ class HistoricMinDataHandler(DataHandler):
 
             #Set the latest symbol data to None
             self.latest_symbol_data[s] = []
-            #latest_symbol_data를 어떻게 다루는지 봐야될듯
+            #latest_symbol_data 다루는 방식 중요 / 점점 쌓여감
 
         for s in self.symbol_list:
             self.symbol_data[s] = self.symbol_data[s].\
@@ -217,6 +217,8 @@ class HistoricMinDataHandler(DataHandler):
             else:
                 if bar is not None:
                     self.latest_symbol_data[s].append(bar)
-        # print("length: ", len(self.latest_symbol_data[s])) #Length가 계속 늘어남, 일정이상 커지면 과거 정보는 버려줘야하는거 아닌가?
+
         #?
+        # print("length: ", len(self.latest_symbol_data[s])) #Length가 계속 늘어남, 일정이상 커지면 과거 정보는 버려줘야하는거 아닌가?
+        # print(self.latest_symbol_data[s])
         self.events.put(MarketEvent()) # put() 함수는 Queue에 Item을 넣는 함수

@@ -119,7 +119,7 @@ class Backtest(object):
         print(self.portfolio.equity_curve.tail(10))  # 추후 보완 ㄱㄱ
 
         #plot equity curve
-        self.portfolio.equity_curve.plot()
+        self.portfolio.equity_curve['equity_curve'].plot()
         plt.show()
 
     def simulate_trading(self):

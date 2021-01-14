@@ -24,7 +24,7 @@ class MovingAverageCrossStrategy(Strategy):
         :param short_window: The short moving average lookback
         :param long_window: The long moving average lookback
         """
-        self.bars = bars
+        self.bars = bars #bars를 어떻게 DataHandler로 정의해서 들고 오는건지 확인하기
         self.symbol_list = self.bars.symbol_list
         self.events = events
         self.short_window = short_window

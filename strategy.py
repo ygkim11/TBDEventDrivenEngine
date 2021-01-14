@@ -21,7 +21,7 @@ class Strategy(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def calc_signals(self):
+    def calc_signals(self, *args, **kwargs):
         """
         Provides the mechanisms to calculate the list of signals.
         """
